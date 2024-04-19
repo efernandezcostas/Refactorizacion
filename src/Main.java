@@ -1,64 +1,70 @@
 public class Main {
     /**
-     * metodo para devolver la puntuacion de tenis
+     * método para devolver la puntuación de tenis
      */
-    public static String getScore(int m_score1, int m_score2) {
-        String score = "";
-        int tempScore=0;
 
-        if (m_score1 == m_score2) {
-            switch (m_score1)
-            {
+    private static final int PUNTUACION_MAXIMA = 4;
+
+    private static String jugadoresConLaMismaPuntuacion(int puntuacion){
+        return switch (puntuacion){
+            case 0 -> "Love-All";
+            case 1 -> "Fifteen-All";
+            case 2 -> "Thirty-All";
+            case 3 -> "Forty-All";
+            default -> "Deuce";
+        };
+    }
+
+    private static String jugadorConMasPuntuacion(int minusResult){
+        if (minusResult == 1)       return "Advantage player1";
+        else if (minusResult == -1) return "Advantage player2";
+        else if (minusResult >= 2)  return "Win for player1";
+        else                        return "Win for player2";
+    }
+
+    private static String jugadorVentaja(int tempScore, int puntuacionJugador1, int puntuacionJugador2){
+        String mensajeSalida = "";
+        for (int i = 1; i < 3; i++) {
+            if (i == 1){
+                tempScore = puntuacionJugador1;
+            }
+            else {
+                mensajeSalida += "-";
+                tempScore = puntuacionJugador2;
+            }
+            switch (tempScore) {
                 case 0:
-                    score = "Love-All";
+                    mensajeSalida += "Love";
                     break;
                 case 1:
-                    score = "Fifteen-All";
+                    mensajeSalida += "Fifteen";
                     break;
                 case 2:
-                    score = "Thirty-All";
+                    mensajeSalida += "Thirty";
                     break;
                 case 3:
-                    score = "Forty-All";
+                    mensajeSalida += "Forty";
                     break;
-                default:
-                    score = "Deuce";
-                    break;
-
             }
         }
-        else if (m_score1 >=4 || m_score2 >=4)
-        {
-            int minusResult = m_score1-m_score2;
-            if (minusResult==1) score ="Advantage player1";
-            else if (minusResult ==-1) score ="Advantage player2";
-            else if (minusResult>=2) score = "Win for player1";
-            else score ="Win for player2";
-        }
-        else
-        {
-            for (int i=1; i<3; i++)
-            {
-                if (i==1) tempScore = m_score1;
-                else { score+="-"; tempScore = m_score2;}
-                switch(tempScore)
-                {
-                    case 0:
-                        score+="Love";
-                        break;
-                    case 1:
-                        score+="Fifteen";
-                        break;
-                    case 2:
-                        score+="Thirty";
-                        break;
-                    case 3:
-                        score+="Forty";
-                        break;
-                }
-            }
-
-        }
-    return score;
+        return mensajeSalida;
     }
+
+
+    public static String getScore(int puntuacionJugador1, int puntuacionJugador2) {
+        String mensajeSalida = "";
+        int tempScore = 0;
+
+        if (puntuacionJugador1 == puntuacionJugador2) {
+            mensajeSalida = jugadoresConLaMismaPuntuacion(puntuacionJugador1);
+        } else if (puntuacionJugador1 >= PUNTUACION_MAXIMA || puntuacionJugador2 >= PUNTUACION_MAXIMA) {
+            int resultadoMinimo = puntuacionJugador1 - puntuacionJugador2;
+            mensajeSalida = jugadorConMasPuntuacion(resultadoMinimo);
+        } else {
+            mensajeSalida = jugadorVentaja(tempScore ,puntuacionJugador1, puntuacionJugador2);
+        }
+        return mensajeSalida;
+    }
+
+
 }
