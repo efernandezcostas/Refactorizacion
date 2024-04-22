@@ -19,31 +19,31 @@ public class Main {
     }
 
     private static String jugadorVentaja(int puntuacionTemporal, int puntuacionJugador1, int puntuacionJugador2){
-        String mensajeSalida = "";
+        StringBuilder mensajeSalida = new StringBuilder();
         for (int i = 1; i < 3; i++) {
             if (i == 1){
                 puntuacionTemporal = puntuacionJugador1;
             }
             else {
-                mensajeSalida += "-";
+                mensajeSalida.append("-");
                 puntuacionTemporal = puntuacionJugador2;
             }
             switch (puntuacionTemporal) {
                 case 0:
-                    mensajeSalida += "Love";
+                    mensajeSalida.append("Love");
                     break;
                 case 1:
-                    mensajeSalida += "Fifteen";
+                    mensajeSalida.append("Fifteen");
                     break;
                 case 2:
-                    mensajeSalida += "Thirty";
+                    mensajeSalida.append("Thirty");
                     break;
                 case 3:
-                    mensajeSalida += "Forty";
+                    mensajeSalida.append("Forty");
                     break;
             }
         }
-        return mensajeSalida;
+        return mensajeSalida.toString();
     }
 
 
