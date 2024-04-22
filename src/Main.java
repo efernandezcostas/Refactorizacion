@@ -5,17 +5,18 @@ public class Main {
 
     private static final int PUNTUACION_MAXIMA = 4;
     private static final String[] PUNTUACIONES_IGUALES = {"Love-All","Fifteen-All","Thirty-All", "Forty-All", "Deuce"};
-    private static final String[] PUNTUACIONES_DIFERENTES = {"Advantage player1", "Advantage player2", "Win for player1", "Win for player2"};
+    private static final String[] PUNTUACIONES_VENTAJA = {"Advantage player1", "Advantage player2", "Win for player1", "Win for player2"};
+    private static final String[] PUNTUACIONES_DIFERENTES = {"Love", "Fifteen", "Thirty", "Forty"};
 
     private static String jugadoresConLaMismaPuntuacion(int puntuacion){
         return PUNTUACIONES_IGUALES[puntuacion];
     }
 
     private static String jugadorConMasPuntuacion(int minusResult){
-        if (minusResult == 1)       return PUNTUACIONES_DIFERENTES[0];
-        else if (minusResult == -1) return PUNTUACIONES_DIFERENTES[1];
-        else if (minusResult >= 2)  return PUNTUACIONES_DIFERENTES[2];
-        else                        return PUNTUACIONES_DIFERENTES[3];
+        if (minusResult == 1)       return PUNTUACIONES_VENTAJA[0];
+        else if (minusResult == -1) return PUNTUACIONES_VENTAJA[1];
+        else if (minusResult >= 2)  return PUNTUACIONES_VENTAJA[2];
+        else                        return PUNTUACIONES_VENTAJA[3];
     }
 
     private static String jugadorVentaja(int puntuacionTemporal, int puntuacionJugador1, int puntuacionJugador2){
@@ -28,20 +29,7 @@ public class Main {
                 mensajeSalida.append("-");
                 puntuacionTemporal = puntuacionJugador2;
             }
-            switch (puntuacionTemporal) {
-                case 0:
-                    mensajeSalida.append("Love");
-                    break;
-                case 1:
-                    mensajeSalida.append("Fifteen");
-                    break;
-                case 2:
-                    mensajeSalida.append("Thirty");
-                    break;
-                case 3:
-                    mensajeSalida.append("Forty");
-                    break;
-            }
+            mensajeSalida.append(PUNTUACIONES_DIFERENTES[puntuacionTemporal]);
         }
         return mensajeSalida.toString();
     }
