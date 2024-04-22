@@ -4,35 +4,31 @@ public class Main {
      */
 
     private static final int PUNTUACION_MAXIMA = 4;
+    private static final String[] PUNTUACIONES_IGUALES = {"Love-All","Fifteen-All","Thirty-All", "Forty-All", "Deuce"};
+    private static final String[] PUNTUACIONES_DIFERENTES = {"Advantage player1", "Advantage player2", "Win for player1", "Win for player2"};
 
     private static String jugadoresConLaMismaPuntuacion(int puntuacion){
-        return switch (puntuacion){
-            case 0 -> "Love-All";
-            case 1 -> "Fifteen-All";
-            case 2 -> "Thirty-All";
-            case 3 -> "Forty-All";
-            default -> "Deuce";
-        };
+        return PUNTUACIONES_IGUALES[puntuacion];
     }
 
     private static String jugadorConMasPuntuacion(int minusResult){
-        if (minusResult == 1)       return "Advantage player1";
-        else if (minusResult == -1) return "Advantage player2";
-        else if (minusResult >= 2)  return "Win for player1";
-        else                        return "Win for player2";
+        if (minusResult == 1)       return PUNTUACIONES_DIFERENTES[0];
+        else if (minusResult == -1) return PUNTUACIONES_DIFERENTES[1];
+        else if (minusResult >= 2)  return PUNTUACIONES_DIFERENTES[2];
+        else                        return PUNTUACIONES_DIFERENTES[3];
     }
 
-    private static String jugadorVentaja(int tempScore, int puntuacionJugador1, int puntuacionJugador2){
+    private static String jugadorVentaja(int puntuacionTemporal, int puntuacionJugador1, int puntuacionJugador2){
         String mensajeSalida = "";
         for (int i = 1; i < 3; i++) {
             if (i == 1){
-                tempScore = puntuacionJugador1;
+                puntuacionTemporal = puntuacionJugador1;
             }
             else {
                 mensajeSalida += "-";
-                tempScore = puntuacionJugador2;
+                puntuacionTemporal = puntuacionJugador2;
             }
-            switch (tempScore) {
+            switch (puntuacionTemporal) {
                 case 0:
                     mensajeSalida += "Love";
                     break;
