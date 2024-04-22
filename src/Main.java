@@ -19,8 +19,10 @@ public class Main {
         else                        return PUNTUACIONES_VENTAJA[3];
     }
 
-    private static String jugadorVentaja(int puntuacionTemporal, int puntuacionJugador1, int puntuacionJugador2){
+    private static String jugadorVentaja(int puntuacionJugador1, int puntuacionJugador2){
         StringBuilder mensajeSalida = new StringBuilder();
+        int puntuacionTemporal;
+
         for (int i = 1; i < 3; i++) {
             if (i == 1){
                 puntuacionTemporal = puntuacionJugador1;
@@ -37,7 +39,6 @@ public class Main {
 
     public static String getScore(int puntuacionJugador1, int puntuacionJugador2) {
         String mensajeSalida = "";
-        int tempScore = 0;
 
         if (puntuacionJugador1 == puntuacionJugador2) {
             mensajeSalida = jugadoresConLaMismaPuntuacion(puntuacionJugador1);
@@ -45,10 +46,8 @@ public class Main {
             int resultadoMinimo = puntuacionJugador1 - puntuacionJugador2;
             mensajeSalida = jugadorConMasPuntuacion(resultadoMinimo);
         } else {
-            mensajeSalida = jugadorVentaja(tempScore ,puntuacionJugador1, puntuacionJugador2);
+            mensajeSalida = jugadorVentaja(puntuacionJugador1, puntuacionJugador2);
         }
         return mensajeSalida;
     }
-
-
 }
